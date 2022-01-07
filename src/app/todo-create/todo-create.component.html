@@ -1,0 +1,65 @@
+<form (ngSubmit)="f.form.valid && onSubmit(f)" #f="ngForm" class="border border-bottom mb-4 p-2 bg-light rounded">
+    <div class="form-row">
+      <div class="form-group col">
+        <label for="edit-todo-title" class="sr-only">Titel</label>
+        <input type="text"
+               id="edit-todo-title"
+               name="title"
+               class="form-control"
+               placeholder="Titel"
+               required
+               [(ngModel)]="todo.title"
+               #title="ngModel">
+        <div *ngIf="f.submitted && title.invalid">
+            <div>
+                <div *ngIf="title.errors?.['required']" class="danger">
+                    Title is required.
+                </div>
+            </div>
+        </div>
+      </div>
+      <div class="form-group col">
+        <label for="edit-todo-duedate" class="sr-only">Frist</label>
+        <input type="date"
+               id="edit-todo-duedate"
+               name="duedate"
+               class="form-control"
+               placeholder="Frist"
+               aria-describedby="duedate-description"
+               useValueAsLocalDate
+               [(ngModel)]="todo.dueDate">
+        <small id="duedate-description" class="form-text text-muted">
+          Frist, bis zu der das Todo erledigt sein soll
+        </small>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col">
+        <label for="edit-todo-description" class="sr-only">Beschreibung</label>
+        <input type="text"
+               id="edit-todo-description"
+               name="description"
+               class="form-control"
+               placeholder="Beschreibung"
+               required
+               [(ngModel)]="todo.description"
+               #description="ngModel">
+            <div *ngIf="f.submitted && description.invalid">
+                <div>
+                    <div *ngIf="description.errors?.['required']" class="danger">
+                        Description is required.
+                    </div>
+                </div>
+            </div>
+      </div>
+    </div>
+  
+    <div class="form-row">
+      <div class="col">
+        <button type="submit" class="btn btn-primary">{{isNewTodo() ? 'Anlegen' : 'Speichern'}}</button>
+        <button *ngIf="!isNewTodo()" type="button" (click)="cancelUpdate(f)" class="btn btn-danger ml-2">Abbrechen</button>
+      </div>
+    </div>
+  
+  </form>
+  

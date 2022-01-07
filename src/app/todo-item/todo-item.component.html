@@ -1,0 +1,21 @@
+<div class="card" *ngIf="todo">
+    <div class="card-header d-flex justify-content-between">
+      <h5 [class.line-trough]="todo.done">{{ index }} - {{todo.title | uppercase}}</h5>
+      <div>
+        <span *ngIf="todo.done" class="badge badge-success">
+          Done
+        </span>
+        <span *ngIf="todo.dueDate" class="badge badge-primary ml-2 due-date">
+          {{todo.dueDate | date: 'dd.MM.yyyy'}}
+        </span>
+      </div>
+    </div>
+    <div class="card-body">
+      <p class="card-text">{{todo.description}}</p>
+      <div class="btn-group" role="group">
+        <button type="button" [className]="todo.done ? 'btn btn-outline-danger' : 'btn btn-outline-success'" (click)="onCheckedClicked()">{{ todo.done ? 'Doch nicht' : 'Erledigt' }}</button>
+        <button type="button" class="btn btn-outline-danger" (click)="onDeleteClicked()">Löschen</button>
+        <button type="button" class="btn btn-outline-primary" (click)="onUpdateClicked()">Bearbeiten</button>
+      </div>
+    </div>
+</div>
