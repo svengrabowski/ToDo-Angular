@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { TodoItem } from '../../models/todo-item';
 import { TodoService } from '../../service/todo.service';
 
@@ -6,13 +7,15 @@ import { TodoService } from '../../service/todo.service';
   selector: 'app-todo-list',
   templateUrl: './todo-list.component.html',
 })
-export class TodoListComponent implements OnInit {
+export class TodoListComponent implements OnInit, OnDestroy {
 
   public userName: string = 'Sven'
   public todoList: TodoItem[] = [];
   public todoToBeEdited: TodoItem = new TodoItem();
   public error: boolean = false;
   public loading: boolean = true;
+
+  private subscription: Subscription | null = null;
 
   constructor(private todoService: TodoService) { }
 
@@ -27,13 +30,18 @@ export class TodoListComponent implements OnInit {
   }
 
   private loadToDos(): void {
-    this.todoService.getAllTodoItems().then(data => {
-      this.todoList = data;
-      this.loading = false;
-    }, () => {
-      this.error = true;
-      this.loading = false;
-    });
+
+    this.subscription = this.todoService.getAllTodoItems()
+      .subscribe({
+        next: (data) => {
+          this.todoList = data;
+          this.loading = false;
+        },
+        error: () => {
+          this.error = true;
+          this.loading = false;
+        }
+      })
   }
 
   public onCreateTodo(todoItem: TodoItem): void {
@@ -66,5 +74,9 @@ export class TodoListComponent implements OnInit {
 
   public updateToDo(todoItem: TodoItem): void {
     this.todoToBeEdited = {...todoItem};
+  }
+
+  public ngOnDestroy() {
+    this.subscription?.unsubscribe();
   }
 }

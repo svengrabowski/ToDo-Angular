@@ -6,11 +6,7 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './app.component.html',
 })
 export class AppComponent {
-  public links = [
-    { title: 'ToDos', fragment: 'todo' },
-    { title: 'Notes', fragment: 'note' }
-  ];
   public title = 'todo-app';
 
-  constructor(public route: ActivatedRoute) {}
+  constructor() {}
 }

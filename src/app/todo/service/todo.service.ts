@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { TodoItem } from '../models/todo-item';
 import { HttpClient } from '@angular/common/http';
-import { lastValueFrom } from 'rxjs';
+import { lastValueFrom, Observable } from 'rxjs';
 import { retry } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
@@ -9,16 +9,13 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class TodoService {
-  
+
   public readonly basePath: string = environment.baseUrl;
 
   constructor(private httpClient: HttpClient) { }
 
-  public getAllTodoItems(): Promise<TodoItem[]> {
-    return this.httpClient.get<TodoItem[]>(`${this.basePath}todos`)
-    .pipe(retry(2))
-    .toPromise()
-    .then(todos => todos!.map(todo => todo));
+  public getAllTodoItems(): Observable<TodoItem[]> {
+    return this.httpClient.get<TodoItem[]>(`${this.basePath}todos`);
   }
 
   public saveTodoItem(item: TodoItem): Promise<TodoItem> {
