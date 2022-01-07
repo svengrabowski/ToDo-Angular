@@ -1,12 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { NoteListComponent } from './note-list/note-list.component';
-import { NotfoundComponent } from './notfound/notfound.component';
-import { TodoListComponent } from './todo-list/todo-list.component';
+import { NotfoundComponent } from './components/notfound/notfound.component';
+import { TodoListComponent } from './todo/components/todo-list/todo-list.component';
 
 const routes: Routes = [
   {path:'todo', component: TodoListComponent},
-  {path:'notes', component: NoteListComponent},
+  {
+    path: 'note',
+    loadChildren: () => import('./note/note.module').then(m => m.NoteModule)
+  },
   { path: '',   redirectTo: '/todo', pathMatch: 'full' },
   {path:'**', component: NotfoundComponent}
 ];

@@ -8,7 +8,7 @@ import { ActivatedRoute } from '@angular/router';
 export class AppComponent {
   public links = [
     { title: 'ToDos', fragment: 'todo' },
-    { title: 'Notes', fragment: 'notes' }
+    { title: 'Notes', fragment: 'note' }
   ];
   public title = 'todo-app';
 

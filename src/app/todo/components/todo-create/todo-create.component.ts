@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { TodoItem } from '../models/todo-item';
+import { TodoItem } from '../../models/todo-item';
 
 @Component({
   selector: 'app-todo-create',

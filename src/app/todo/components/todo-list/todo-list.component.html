@@ -11,9 +11,9 @@
     </div>
 </div>
 <h3 class="d-flex justify-content-center" *ngIf="todoList.length === 0 && !loading && !error">Keine TODOs in deiner Liste.</h3>
-<div *ngIf="error">
-    <div class="alert alert-danger" role="alert">
-        Fehler beim abrufen der ToDos!
+<div *ngIf="error" >
+    <div class="alert alert-danger card-header d-flex justify-content-between" role="alert">
+        <div>Fehler beim abrufen der ToDos!</div>
         <button type="button" class="btn btn-outline-danger" (click)="retry()">Erneut versuchen</button>
     </div>
 </div>
