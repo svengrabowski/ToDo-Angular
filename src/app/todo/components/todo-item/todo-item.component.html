@@ -11,7 +11,7 @@
       </div>
     </div>
     <div class="card-body">
-      <p class="card-text">{{todo.description}}</p>
+      <p class="card-text">{{todo.description | cut: 20}}</p>
       <div class="btn-group" role="group">
         <button type="button" [className]="todo.done ? 'btn btn-outline-danger' : 'btn btn-outline-success'" (click)="onCheckedClicked()">{{ todo.done ? 'Doch nicht' : 'Erledigt' }}</button>
         <button type="button" class="btn btn-outline-danger" (click)="onDeleteClicked()">Löschen</button>

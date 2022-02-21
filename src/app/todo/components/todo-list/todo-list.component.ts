@@ -7,7 +7,7 @@ import { TodoService } from '../../service/todo.service';
   selector: 'app-todo-list',
   templateUrl: './todo-list.component.html',
 })
-export class TodoListComponent implements OnInit, OnDestroy {
+export class TodoListComponent implements OnDestroy {
 
   public userName: string = 'Sven'
   public todoList: TodoItem[] = [];
@@ -17,11 +17,9 @@ export class TodoListComponent implements OnInit, OnDestroy {
 
   private subscription: Subscription | null = null;
 
-  constructor(private todoService: TodoService) { }
-
-  ngOnInit(): void {
+  constructor(private todoService: TodoService) {
     this.loadToDos();
-  }
+   }
 
   public retry(): void {
     this.error = false;
@@ -45,6 +43,7 @@ export class TodoListComponent implements OnInit, OnDestroy {
   }
 
   public onCreateTodo(todoItem: TodoItem): void {
+    console.log(todoItem.id);
     this.todoService.saveTodoItem(todoItem).then(item => {
       this.todoList.push(item);
     });

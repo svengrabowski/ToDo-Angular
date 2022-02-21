@@ -1,6 +1,7 @@
 <h2>
    Willkommen bei deiner ToDo-Liste, {{ userName }}!
 </h2>
+<app-todo-create-reactive (formSubmitted)="onCreateTodo($event)" [todo]="todoToBeEdited"></app-todo-create-reactive>
 <app-todo-create (todoEditDone)="onCreateTodo($event)" (todoUpdateDone)="saveUpdatedToDo($event)" [todo]="todoToBeEdited"></app-todo-create>
 <div *ngFor="let todo of todoList; let i = index">
     <app-todo-item [todo]="todo" [index]="i + 1" (todoDelete)="deleteTodoItem($event)" (todoChecked)="markAsChecked($event)" (todoUpdate)="updateToDo($event)">
